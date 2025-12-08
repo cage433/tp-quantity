@@ -45,6 +45,10 @@ class QtyArray:
     def std(self) -> Qty:
         return Qty(self.values.std(), self.uom)
 
+    @property
+    def std_err(self) -> Qty:
+        return Qty(self.values.std() / np.sqrt(self.values.size), self.uom)
+
     def __mul__(self, other) -> 'QtyArray':
         checked_type(other, (Qty, QtyArray))
         if isinstance(other, Qty):

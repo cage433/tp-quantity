@@ -81,5 +81,13 @@ class QtyArray:
         return QtyArray(self.values / other.values, self.uom / other.uom)
 
     @property
-    def inverse(self):
+    def inverse(self) -> 'QtyArray':
         return QtyArray(1.0 / self.values, self.uom.inverse)
+
+    def checked_values(self, uom: UOM) -> ndarray:
+        assert self.uom == uom, f"Expected uom {uom}, versus {self.uom}"
+        return self.values
+
+    @property
+    def checked_scalar_values(self) -> ndarray:
+        return self.checked_values(SCALAR)

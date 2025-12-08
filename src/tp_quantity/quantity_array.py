@@ -37,6 +37,14 @@ class QtyArray:
     def shape(self):
         return self.values.shape
 
+    @property
+    def mean(self):
+        return Qty(self.values.mean(), self.uom)
+
+    @property
+    def std(self):
+        return Qty(self.values.std(), self.uom)
+
     def __mul__(self, other) -> 'QtyArray':
         checked_type(other, (Qty, QtyArray))
         if isinstance(other, Qty):

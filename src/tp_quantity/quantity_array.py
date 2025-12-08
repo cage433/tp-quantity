@@ -29,7 +29,7 @@ class QtyArray:
     def __repr__(self):
         return self.__str__()
 
-    def almost_equals(self, other, tol = 1e-6):
+    def almost_equals(self, other, tol = 1e-6) -> bool:
         return (isinstance(other, QtyArray) and self.values.shape == other.values.shape and self.uom == other.uom
                 and abs(self.values - other.values).max() < tol)
 
@@ -38,11 +38,11 @@ class QtyArray:
         return self.values.shape
 
     @property
-    def mean(self):
+    def mean(self) -> Qty:
         return Qty(self.values.mean(), self.uom)
 
     @property
-    def std(self):
+    def std(self) -> Qty:
         return Qty(self.values.std(), self.uom)
 
     def __mul__(self, other) -> 'QtyArray':
@@ -62,7 +62,7 @@ class QtyArray:
         assert self.shape == other.shape, f"Mismatching shapes {self.shape} vs {other.shape}"
         return QtyArray(self.values + other.values, self.uom)
 
-    def negate(self):
+    def negate(self) -> 'QtyArray':
         return QtyArray(self.values * -1, self.uom)
 
     def __sub__(self, other) -> 'QtyArray':

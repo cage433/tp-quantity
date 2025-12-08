@@ -29,7 +29,7 @@ class Qty:
             raise ValueError(f"Cannot add Qty with different uom, {self} vs {other}")
         return Qty(self.value + other.value, self.uom)
 
-    def negate(self):
+    def negate(self) -> 'Qty':
         return Qty(-self.value, self.uom)
 
     def __sub__(self, other: 'Qty') -> 'Qty':
@@ -39,5 +39,13 @@ class Qty:
         return Qty(self.value / other.value, self.uom / other.uom)
 
     @property
-    def inverse(self):
+    def inverse(self) -> 'Qty':
         return Qty(1 / self.value, self.uom.inverse)
+
+    def checked_value(self, uom: UOM) -> float:
+        assert self.uom == uom, f"Expected uom {uom}, this is {self}"
+        return self.value
+
+    @property
+    def checked_scalar_value(self) -> float:
+        return self.checked_value(SCALAR)

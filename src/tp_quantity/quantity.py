@@ -62,3 +62,9 @@ class Qty:
     @property
     def abs(self) -> 'Qty':
         return Qty(abs(self.value), self.uom)
+
+    @staticmethod
+    def to_qty(qty_or_number) -> 'Qty':
+        if isinstance(qty_or_number, Number):
+            return Qty(qty_or_number, SCALAR)
+        return checked_type(qty_or_number, Qty)

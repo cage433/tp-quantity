@@ -59,3 +59,6 @@ class QtyTestCase(unittest.TestCase):
     def test_abs(self):
         self.assertEqual(Qty(-3, USD).abs, Qty(3, USD))
         self.assertEqual(Qty(3, USD).abs, Qty(3, USD))
+
+    def test_to_qty(self):
+        self.assertEqual(Qty(3, SCALAR), Qty.to_qty(3))

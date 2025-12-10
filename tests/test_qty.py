@@ -55,3 +55,7 @@ class QtyTestCase(unittest.TestCase):
 
         self.assertEqual(Qty(20, USD), max(Qty(20, USD), Qty(10, USD)))
         self.assertEqual(Qty(20, USD), max(Qty(10, USD), Qty(20, USD)))
+
+    def test_abs(self):
+        self.assertEqual(Qty(-3, USD).abs, Qty(3, USD))
+        self.assertEqual(Qty(3, USD).abs, Qty(3, USD))

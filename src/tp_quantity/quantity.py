@@ -58,3 +58,7 @@ class Qty:
 
     def max(self, other) -> 'Qty':
         return max(self, other)
+
+    @property
+    def abs(self) -> 'Qty':
+        return Qty(abs(self.value), self.uom)

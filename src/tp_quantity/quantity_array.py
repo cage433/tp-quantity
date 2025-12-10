@@ -91,3 +91,7 @@ class QtyArray:
     @property
     def checked_scalar_values(self) -> ndarray:
         return self.checked_values(SCALAR)
+
+    @property
+    def abs(self) -> 'QtyArray':
+        return QtyArray(np.abs(self.values), self.uom)

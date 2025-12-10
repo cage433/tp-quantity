@@ -38,8 +38,20 @@ class QtyTestCase(unittest.TestCase):
             Qty(3, USD) + Qty(2, USD),
             Qty(5, USD)
         )
+
     def test_minus(self):
         self.assertEqual(
             Qty(3, USD) - Qty(2, USD),
             Qty(1, USD)
         )
+
+    # noinspection PyTypeChecker
+    def test_ordering(self):
+        self.assertLess(Qty(1, USD), Qty(2, USD))
+        self.assertLessEqual(Qty(1, USD), Qty(2, USD))
+        self.assertLessEqual(Qty(2, USD), Qty(2, USD))
+        self.assertGreater(Qty(2, USD), Qty(1, USD))
+        self.assertGreaterEqual(Qty(2, USD), Qty(1, USD))
+
+        self.assertEqual(Qty(20, USD), max(Qty(20, USD), Qty(10, USD)))
+        self.assertEqual(Qty(20, USD), max(Qty(10, USD), Qty(20, USD)))

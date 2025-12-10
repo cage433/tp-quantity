@@ -1,10 +1,11 @@
+from functools import total_ordering
 from numbers import Number
 
 from tp_utils.type_utils import checked_type
 
 from tp_quantity.uom import UOM, SCALAR
 
-
+@total_ordering
 class Qty:
     def __init__(self, value: Number, uom: UOM):
         self.value: float = checked_type(value, Number)
@@ -20,6 +21,11 @@ class Qty:
 
     def __eq__(self, other):
         return isinstance(other, Qty) and self.value == other.value and self.uom == other.uom
+
+    def __lt__(self, other: 'Qty'):
+        if self.uom != other.uom:
+            raise ValueError(f"Cannot compare Qty with different uom, {self} vs {other}")
+        return self.value < other.value
 
     def __mul__(self, other: 'Qty') -> 'Qty':
         return Qty(self.value * other.value, self.uom * other.uom)
@@ -49,3 +55,6 @@ class Qty:
     @property
     def checked_scalar_value(self) -> float:
         return self.checked_value(SCALAR)
+
+    def max(self, other) -> 'Qty':
+        return max(self, other)

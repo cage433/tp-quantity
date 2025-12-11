@@ -55,6 +55,14 @@ class UOM:
         return self in CURRENCIES
 
     @property
+    def numerator(self):
+        return UOM({k:v for k, v in self.powers.items() if v > 0})
+
+    @property
+    def denominator(self):
+        return self.inverse.numerator
+
+    @property
     def inverse(self) -> 'UOM':
         if self not in INV_CACHE:
             inverted = {k:-v for k,v in self.powers.items()}

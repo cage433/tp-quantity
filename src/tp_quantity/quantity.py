@@ -12,15 +12,17 @@ class Qty:
         self.uom: UOM = checked_type(uom, UOM)
 
     def __str__(self):
-        if self.uom == SCALAR:
-            return f"{self.value}"
-        return f"{self.value} {self.uom}"
+        return self.fmt(n_dp=3)
 
     def __repr__(self):
         return self.__str__()
 
     def __eq__(self, other):
         return isinstance(other, Qty) and self.value == other.value and self.uom == other.uom
+
+    def fmt(self, n_dp):
+        uom_text = "" if self.uom == SCALAR else f" {self.uom}"
+        return f"{round(self.value, n_dp)}{uom_text}"
 
     def __lt__(self, other: 'Qty'):
         if self.uom != other.uom:

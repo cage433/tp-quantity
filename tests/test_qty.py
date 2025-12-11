@@ -12,6 +12,13 @@ class QtyTestCase(unittest.TestCase):
         self.assertEqual(str(Qty(1, USD.inverse)), '1 USD^-1')
         self.assertEqual(str(Qty(1, USD / MWH)), '1 USD / MWH')
         self.assertEqual(str(Qty(1, USD * MT / MWH)), '1 MT USD / MWH')
+        self.assertEqual(str(Qty(1.2344, USD * MT / MWH)), '1.234 MT USD / MWH')
+        self.assertEqual(str(Qty(1.2346, USD * MT / MWH)), '1.235 MT USD / MWH')
+
+    def test_fmt(self):
+        self.assertEqual('1.123 USD', Qty(1.1234, USD).fmt(n_dp=3))
+        self.assertEqual('1.12 USD', Qty(1.1234, USD).fmt(n_dp=2))
+        self.assertEqual('1.1 USD', Qty(1.1, USD).fmt(n_dp=2))
 
     def test_multiply(self):
         self.assertEqual(

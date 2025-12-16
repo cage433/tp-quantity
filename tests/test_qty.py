@@ -1,10 +1,11 @@
 import unittest
 
 from tp_quantity.quantity import Qty
+from tp_quantity.quantity_test_utils import QtyTestUtils
 from tp_quantity.uom import USD, SCALAR, MWH, MT
 
 
-class QtyTestCase(unittest.TestCase):
+class QtyTestCase(unittest.TestCase, QtyTestUtils):
     def test_str(self):
         self.assertEqual(str(Qty(1, USD)), '1 USD')
         self.assertEqual(str(Qty(1.5, SCALAR)), '1.5')
@@ -90,4 +91,5 @@ class QtyTestCase(unittest.TestCase):
 
     def test_sum(self):
         self.assertEqual(Qty(2, USD), Qty.sum([Qty(1, USD), Qty(1, USD)]))
+        self.assertVeryClose(Qty(2, USD), Qty.sum([Qty(1, USD), Qty(1, USD)]))
         self.assertEqual(Qty(1, USD), Qty.sum([Qty(1, USD)]))

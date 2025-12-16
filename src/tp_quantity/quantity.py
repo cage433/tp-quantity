@@ -73,6 +73,9 @@ class Qty:
     def abs(self) -> 'Qty':
         return Qty(abs(self.value), self.uom)
 
+    def __abs__(self) -> 'Qty':
+        return self.abs
+
     @staticmethod
     def to_qty(qty_or_number) -> 'Qty':
         if isinstance(qty_or_number, Number):

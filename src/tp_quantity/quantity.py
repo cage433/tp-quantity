@@ -76,6 +76,10 @@ class Qty:
     def __abs__(self) -> 'Qty':
         return self.abs
 
+    @property
+    def is_zero(self):
+        return self.value == 0
+
     @staticmethod
     def to_qty(qty_or_number) -> 'Qty':
         if isinstance(qty_or_number, Number):

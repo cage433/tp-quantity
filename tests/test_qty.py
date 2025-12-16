@@ -83,3 +83,7 @@ class QtyTestCase(unittest.TestCase):
         self.assertEqual(-Qty(3, SCALAR), Qty(-3, SCALAR))
         self.assertEqual(-Qty(-3, SCALAR), Qty(3, SCALAR))
         self.assertEqual(-Qty(0, SCALAR), Qty(0, SCALAR))
+
+    def test_is_zero(self):
+        self.assertTrue(Qty(0, USD).is_zero)
+        self.assertFalse(Qty(1, USD).is_zero)

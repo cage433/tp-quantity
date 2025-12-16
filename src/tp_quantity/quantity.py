@@ -37,11 +37,14 @@ class Qty:
             raise ValueError(f"Cannot add Qty with different uom, {self} vs {other}")
         return Qty(self.value + other.value, self.uom)
 
+    def __neg__(self) -> 'Qty':
+        return Qty(-self.value, self.uom)
+
     def negate(self) -> 'Qty':
         return Qty(-self.value, self.uom)
 
     def __sub__(self, other: 'Qty') -> 'Qty':
-        return self + other.negate()
+        return self + (-other)
 
     def __truediv__(self, other: 'Qty') -> 'Qty':
         return Qty(self.value / other.value, self.uom / other.uom)

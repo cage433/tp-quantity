@@ -66,12 +66,12 @@ class QtyArray:
         assert self.shape == other.shape, f"Mismatching shapes {self.shape} vs {other.shape}"
         return QtyArray(self.values + other.values, self.uom)
 
-    def negate(self) -> 'QtyArray':
+    def __neg__(self) -> 'QtyArray':
         return QtyArray(self.values * -1, self.uom)
 
     def __sub__(self, other) -> 'QtyArray':
         checked_type(other, (Qty, QtyArray))
-        return self + other.negate()
+        return self + (-other)
 
     def __truediv__(self, other) -> 'QtyArray':
         checked_type(other, (Qty, QtyArray))

@@ -74,3 +74,9 @@ class QtyArrayTestCase(unittest.TestCase):
             QtyArray([3, 4], USD) - QtyArray([2, 1], USD),
             QtyArray([1, 3], USD)
         )
+
+    def test_negation(self):
+        self._check_close(
+            -QtyArray(3, USD),
+            QtyArray(-3, USD)
+        )

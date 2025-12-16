@@ -69,3 +69,8 @@ class QtyTestCase(unittest.TestCase):
 
     def test_to_qty(self):
         self.assertEqual(Qty(3, SCALAR), Qty.to_qty(3))
+
+    def test_negate(self):
+        self.assertEqual(-Qty(3, SCALAR), Qty(-3, SCALAR))
+        self.assertEqual(-Qty(-3, SCALAR), Qty(3, SCALAR))
+        self.assertEqual(-Qty(0, SCALAR), Qty(0, SCALAR))

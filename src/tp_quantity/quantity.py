@@ -1,5 +1,6 @@
 from functools import total_ordering
 from numbers import Number
+from typing import Union
 
 from tp_utils.type_utils import checked_type
 
@@ -29,7 +30,9 @@ class Qty:
             raise ValueError(f"Cannot compare Qty with different uom, {self} vs {other}")
         return self.value < other.value
 
-    def __mul__(self, other: 'Qty') -> 'Qty':
+    def __mul__(self, other: Union['Qty', Number]) -> 'Qty':
+        if isinstance(other, Number):
+            return self * Qty.to_qty(other)
         return Qty(self.value * other.value, self.uom * other.uom)
 
     def __add__(self, other: 'Qty') -> 'Qty':
@@ -46,7 +49,9 @@ class Qty:
     def __sub__(self, other: 'Qty') -> 'Qty':
         return self + (-other)
 
-    def __truediv__(self, other: 'Qty') -> 'Qty':
+    def __truediv__(self, other: Union['Qty', Number]) -> 'Qty':
+        if isinstance(other, Number):
+            return self / Qty.to_qty(other)
         return Qty(self.value / other.value, self.uom / other.uom)
 
     @property

@@ -26,6 +26,10 @@ class QtyTestCase(unittest.TestCase):
             Qty(6, USD)
         )
         self.assertEqual(
+            Qty(2, USD / MWH) * 3,
+            Qty(6, USD / MWH)
+        )
+        self.assertEqual(
             Qty(2, MWH.inverse) * Qty(3, MWH),
             Qty(6, SCALAR)
         )
@@ -34,6 +38,10 @@ class QtyTestCase(unittest.TestCase):
         self.assertEqual(
             Qty(6, USD * MWH) / Qty(3, MWH),
             Qty(2, USD)
+        )
+        self.assertEqual(
+            Qty(6, USD * MWH) / 3,
+            Qty(2, USD * MWH)
         )
         self.assertEqual(
             Qty(6, SCALAR) / Qty(3, MWH),

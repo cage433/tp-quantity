@@ -85,3 +85,11 @@ class Qty:
         if isinstance(qty_or_number, Number):
             return Qty(qty_or_number, SCALAR)
         return checked_type(qty_or_number, Qty)
+
+    @staticmethod
+    def sum(qtys: list['Qty']) -> 'Qty':
+        assert len(qtys) > 0, "Can't sum empty quantities"
+        s = qtys[0]
+        for q in qtys[1:]:
+            s += q
+        return s

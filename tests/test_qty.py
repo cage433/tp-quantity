@@ -87,3 +87,7 @@ class QtyTestCase(unittest.TestCase):
     def test_is_zero(self):
         self.assertTrue(Qty(0, USD).is_zero)
         self.assertFalse(Qty(1, USD).is_zero)
+
+    def test_sum(self):
+        self.assertEqual(Qty(2, USD), Qty.sum([Qty(1, USD), Qty(1, USD)]))
+        self.assertEqual(Qty(1, USD), Qty.sum([Qty(1, USD)]))

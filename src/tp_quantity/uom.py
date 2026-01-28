@@ -96,5 +96,6 @@ CURRENCIES = {USD, GBP, EUR}
 
 MWH = UOM.uom('MWH')
 MT = UOM.uom('MT')
+SHARE = UOM.uom('SHARE')
 SCALAR = UOM({})
 GBPUSD = USD / GBP

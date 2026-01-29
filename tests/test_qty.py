@@ -89,6 +89,12 @@ class QtyTestCase(unittest.TestCase, QtyTestUtils):
         self.assertTrue(Qty(0, USD).is_zero)
         self.assertFalse(Qty(1, USD).is_zero)
 
+    def test_is_almost_zero(self):
+        self.assertTrue(Qty(0, USD).is_almost_zero())
+        self.assertFalse(Qty(1e-5, USD).is_almost_zero())
+        self.assertFalse(Qty(-1e-5, USD).is_almost_zero(eps=1e-6))
+        self.assertTrue(Qty(1e-7, USD).is_almost_zero(eps=1e-6))
+
     def test_sum(self):
         self.assertEqual(Qty(2, USD), Qty.sum([Qty(1, USD), Qty(1, USD)]))
         self.assertVeryClose(Qty(2, USD), Qty.sum([Qty(1, USD), Qty(1, USD)]))

@@ -80,6 +80,9 @@ class Qty:
     def is_zero(self):
         return self.value == 0
 
+    def is_almost_zero(self, eps=1e-6):
+        return abs(self.value) < eps
+
     @staticmethod
     def to_qty(qty_or_number) -> 'Qty':
         if isinstance(qty_or_number, Number):

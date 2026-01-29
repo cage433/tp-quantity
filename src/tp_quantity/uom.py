@@ -1,8 +1,11 @@
+from functools import total_ordering, cached_property
+
 from tp_utils.type_utils import checked_dict_type
 
 MULT_CACHE = {}
 INV_CACHE = {}
 
+@total_ordering
 class UOM:
     def __init__(self, powers: dict[str, int]):
         self.powers = checked_dict_type(powers, str, int)
@@ -13,7 +16,11 @@ class UOM:
     def __eq__(self, other):
         return isinstance(other, UOM) and self.powers == other.powers
 
-    def __str__(self):
+    def __lt__(self, other):
+        return str(self) < str(other)
+
+    @cached_property
+    def __to_string(self):
         pos_symbols = [k for k, v in self.powers.items() if v > 0 and k != '']
         neg_symbols = [k for k, v in self.powers.items() if v < 0 and k != '']
 
@@ -42,6 +49,10 @@ class UOM:
                 return to_text(neg_symbols, False)
             else:
                 return ''
+
+
+    def __str__(self):
+        return self.__to_string
 
     def __repr__(self):
         return self.__str__()

@@ -1,6 +1,6 @@
 import unittest
 
-from tp_quantity.uom import USD, MWH, SCALAR
+from tp_quantity.uom import USD, MWH, SCALAR, GBP, EUR
 
 
 class UOMTestCase(unittest.TestCase):
@@ -10,3 +10,8 @@ class UOMTestCase(unittest.TestCase):
         self.assertEqual(SCALAR, USD.denominator)
         self.assertEqual(SCALAR, USD.inverse.numerator)
         self.assertEqual(USD, USD.inverse.denominator)
+
+    def test_sorting(self):
+        self.assertEqual(sorted([GBP, USD]), [GBP, USD])
+        self.assertEqual(sorted([USD, GBP]), [GBP, USD])
+        self.assertEqual(sorted([USD, GBP, EUR / MWH]), [EUR / MWH, GBP, USD])
